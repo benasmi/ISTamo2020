@@ -18,10 +18,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import NewsPage from './pages/NewsPage';
 import AddUserPage from './pages/AddUserPage';
 import SchedulePage from './pages/SchedulePage';
+import Marks from './pages/Marks';
 import {Route, Switch, Link } from "react-router-dom";
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import PersonIcon from '@material-ui/icons/Person';
+import MarkIcon from '@material-ui/icons/BorderColor';
 
 const drawerWidth = 240;
 
@@ -143,6 +145,10 @@ export default function App() {
             <ListItemIcon><ScheduleIcon/></ListItemIcon>
             <ListItemText>Schedule</ListItemText>
           </ListItem>
+          <ListItem button component={Link} to="/app/marks">
+            <ListItemIcon><MarkIcon/></ListItemIcon>
+            <ListItemText>Marks</ListItemText>
+          </ListItem>
           <ListItem button component={Link} to="/app/adduser">
             <ListItemIcon><PersonIcon/></ListItemIcon>
             <ListItemText>Add users</ListItemText>
@@ -160,6 +166,7 @@ export default function App() {
                     <Route exact path="/app/news" component={NewsPage} />
                     <Route path="/app/adduser" component={AddUserPage} />
                     <Route path="/app/schedule" component={SchedulePage} />
+                    <Route path="/app/marks" component={Marks} />
                 </Switch>
       </main>
     </div>
