@@ -19,6 +19,7 @@ import NewsPage from './pages/NewsPage';
 import AddUserPage from './pages/AddUserPage';
 import SchedulePage from './pages/SchedulePage';
 import Marks from './pages/Marks';
+import Users from './pages/AllUsersPage';
 import {Route, Switch, Link } from "react-router-dom";
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ScheduleIcon from '@material-ui/icons/Schedule';
@@ -153,6 +154,10 @@ export default function App() {
             <ListItemIcon><PersonIcon/></ListItemIcon>
             <ListItemText>Add users</ListItemText>
           </ListItem>
+          <ListItem button component={Link} to="/app/users">
+            <ListItemIcon><PersonIcon/></ListItemIcon>
+            <ListItemText>All users</ListItemText>
+          </ListItem>
         </List>
         <Divider />
       </Drawer>
@@ -167,6 +172,7 @@ export default function App() {
                     <Route path="/app/adduser" component={AddUserPage} />
                     <Route path="/app/schedule" component={SchedulePage} />
                     <Route path="/app/marks" component={Marks} />
+                    <Route path="/app/users" component={Users} />
                 </Switch>
       </main>
     </div>

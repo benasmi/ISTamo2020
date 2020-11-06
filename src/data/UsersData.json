@@ -1,0 +1,113 @@
+
+[{
+    "id": 1,
+    "vardas": "Jonas",
+    "pavarde": "Jonaitis",
+    "username": "JonJon",
+    "pass": "slaptazodis1",
+    "klasesNr": "5",
+    "klasesR": "A",
+    "userType": "Mokinys"
+}
+,
+{
+    "id": 2,
+    "vardas": "Tomas",
+    "pavarde": "Tomilinas",
+    "username": "TomTom",
+    "pass": "nezinau123",
+    "klasesNr": "5",
+    "klasesR": "A",
+    "userType": "Mokinys"
+}
+,
+{
+    "id": 3,
+    "vardas": "Romas",
+    "pavarde": "Pavardenis",
+    "username": "RomPav",
+    "pass": "uzmirsau90",
+    "klasesNr": "5",
+    "klasesR": "A",
+    "userType": "Mokinys"
+}
+,
+{
+    "id": 4,
+    "vardas": "Petras",
+    "pavarde": "Petraitis",
+    "username": "PetrPetr",
+    "pass": "labasrytas1",
+    "klasesNr": "5",
+    "klasesR": "A",
+    "userType": "Mokinys"
+}
+,
+{
+    "id": 5,
+    "vardas": "Remigijus",
+    "pavarde": "Daskevicius",
+    "username": "RemisRetro",
+    "pass": "saukstaipopietu",
+    "klasesNr": "5",
+    "klasesR": "A",
+    "userType": "Mokinys"
+}
+,
+
+{
+    "id": 6,
+    "vardas": "Jonas",
+    "pavarde": "Jonaitis",
+    "username": "JonJon1",
+    "pass": "slaptazodis12",
+    "klasesNr": "6",
+    "klasesR": "B",
+    "userType": "Mokinys"
+}
+,
+{
+    "id": 7,
+    "vardas": "Tomas",
+    "pavarde": "Tomilinas",
+    "username": "TomTom1",
+    "pass": "nezinau1234",
+    "klasesNr": "6",
+    "klasesR": "B",
+    "userType": "Mokinys"
+}
+,
+{
+    "id": 8,
+    "vardas": "Romas",
+    "pavarde": "Pavardenis",
+    "username": "RomPav1",
+    "pass": "uzmirsau901",
+    "klasesNr": "6",
+    "klasesR": "B",
+    "userType": "Mokinys"
+}
+,
+{
+    "id": 9,
+    "vardas": "Petras",
+    "pavarde": "Petraitis",
+    "username": "PetrPetr1",
+    "pass": "labasrytas12",
+    "klasesNr": "6",
+    "klasesR": "B",
+    "userType": "Mokinys"
+}
+,
+{
+    "id": 10,
+    "vardas": "Remigijus",
+    "pavarde": "Daskevicius",
+    "username": "RemisRetro1",
+    "pass": "saukstaipopietu1",
+    "klasesNr": "6",
+    "klasesR": "B",
+    "userType": "Mokinys"
+}
+
+]
