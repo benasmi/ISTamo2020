@@ -36,6 +36,10 @@ import EditNewMarkPage from "./pages/EditNewMarkPage";
 import CreateNewMarkPage from "./pages/CreateNewMarkPage";
 import CalculateAverageReportPage from "./pages/CalculateAverageReportPage";
 import RatingsPage from "./pages/RatingsPage";
+import ScheduleEditPage from "./pages/ScheduleEditPage";
+import ScheduleAddPage from "./pages/ScheduleAddPage";
+import ScheduleAddTest from "./pages/ScheduleAddTest";
+import ScheduleReportPage from "./pages/ScheduleReportPage";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -191,9 +195,17 @@ export default function App() {
                     <Route path="/app/news/create" component={CreateNewsPage} />
                     <Route exact path="/app/news/:id" component={EditNewsPage} />
                     <Route path="/app/adduser" component={AddUserPage} />
+
+                    <Route exact path="/app/schedule" component={SchedulePage} />
+                    <Route exact path="/app/schedule/create" component={ScheduleAddPage} />
+                    <Route exact path="/app/schedule/test" component={ScheduleAddTest} />
+                    <Route exact path="/app/schedule/report" component={ScheduleReportPage} />
+                    <Route exact path="/app/schedule/:id" component={ScheduleEditPage} />
+
                     <Route path="/app/schedule" component={SchedulePage} />
                     <Route path="/app/edit/:id" component={EditUserPage} />
                     <Route path="/app/reportsheet" component={ReportSheetPage} />
+
                     <Route exact path="/app/marks/average" component={CalculateAverageReportPage} />
                     <Route exact path="/app/marks/ratings" component={RatingsPage} />
                     <Route exact path="/app/marks/create" component={CreateNewMarkPage} />
