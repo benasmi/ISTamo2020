@@ -25,6 +25,9 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import PersonIcon from '@material-ui/icons/Person';
 import MarkIcon from '@material-ui/icons/BorderColor';
+import EditUserPage from "./pages/EditUserPage";
+import ReportSheetPage from "./pages/ReportSheetPage";
+import ListAltIcon from '@material-ui/icons/ListAlt';
 
 const drawerWidth = 240;
 
@@ -158,6 +161,10 @@ export default function App() {
             <ListItemIcon><PersonIcon/></ListItemIcon>
             <ListItemText>All users</ListItemText>
           </ListItem>
+          <ListItem button component={Link} to="/app/reportsheet">
+            <ListItemIcon><ListAltIcon/></ListItemIcon>
+            <ListItemText>Report sheet</ListItemText>
+          </ListItem>
         </List>
         <Divider />
       </Drawer>
@@ -171,6 +178,8 @@ export default function App() {
                     <Route exact path="/app/news" component={NewsPage} />
                     <Route path="/app/adduser" component={AddUserPage} />
                     <Route path="/app/schedule" component={SchedulePage} />
+                    <Route path="/app/edit/:id" component={EditUserPage} />
+                    <Route path="/app/reportsheet" component={ReportSheetPage} />
                     <Route path="/app/marks" component={Marks} />
                     <Route path="/app/users" component={Users} />
                 </Switch>

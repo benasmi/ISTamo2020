@@ -1,9 +1,13 @@
 import React, {useState} from 'react'
 import { GenericTable } from "../components/GenericTable";
 import fakeData from "../data/UsersData.json";
+import {useHistory} from "react-router-dom";
 
 
 export default function AllUsersPage(){
+
+    let history = useHistory();
+
     const tableHeader = [
         {id: "id", label: "Id"},
         {id: "vardas", label: "Vardas"},
@@ -20,8 +24,9 @@ export default function AllUsersPage(){
             <GenericTable
                 data={usersData}
                 header={tableHeader}
-                handleRemove={(id)=>{console.log(id)}}
-                handleUpdate={(id)=>{console.log(id)}}
+                handleRemove={(id)=>{}}
+                handleUpdate={(id)=>{
+                    history.push(`/app/edit/${id}`)}}
             />
           </div>
       );
