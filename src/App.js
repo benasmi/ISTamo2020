@@ -40,8 +40,11 @@ import ScheduleEditPage from "./pages/ScheduleEditPage";
 import ScheduleAddPage from "./pages/ScheduleAddPage";
 import ScheduleAddTest from "./pages/ScheduleAddTest";
 import ScheduleReportPage from "./pages/ScheduleReportPage";
-const drawerWidth = 240;
+import SettingsPage from "./pages/SettingsPage";
+import SettingsIcon from '@material-ui/icons/Settings';
 
+
+const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -181,6 +184,10 @@ export default function App() {
             <ListItemIcon><NoteAddIcon/></ListItemIcon>
             <ListItemText>Sukurti naujieną</ListItemText>
           </ListItem>
+            <ListItem button component={Link} to="/app/settings">
+                <ListItemIcon><SettingsIcon/></ListItemIcon>
+                <ListItemText>Nustatymai</ListItemText>
+            </ListItem>
         </List>
         <Divider />
       </Drawer>
@@ -191,6 +198,7 @@ export default function App() {
       >
         <div className={classes.drawerHeader} />
                 <Switch>
+                    <Route path="/app/settings" component={SettingsPage} />
                     <Route exact path="/app/news" component={NewsPage1} />
                     <Route path="/app/news/create" component={CreateNewsPage} />
                     <Route exact path="/app/news/:id" component={EditNewsPage} />

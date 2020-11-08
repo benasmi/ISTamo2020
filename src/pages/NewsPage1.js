@@ -21,9 +21,10 @@ export default function NewsPage1(){
                 }}>
                     Sukurti naujieną
                 </Button>
+            </div>
 
-
-
+            <div style={{padding: 32, border: '1px solid black', width: '100%', height: 300}}>
+                    Čia bus filtravimo pasirinkimai
             </div>
 
             <div style={{marginTop: 32}}>
