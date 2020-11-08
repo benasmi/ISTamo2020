@@ -31,6 +31,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import NewsPage1 from "./pages/NewsPage1";
 import CreateNewsPage from "./pages/CreateNewsPage";
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
+import EditNewsPage from "./pages/EditNewsPage";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -183,11 +184,12 @@ export default function App() {
         <div className={classes.drawerHeader} />
                 <Switch>
                     <Route exact path="/app/news" component={NewsPage1} />
+                    <Route path="/app/news/create" component={CreateNewsPage} />
+                    <Route exact path="/app/news/:id" component={EditNewsPage} />
                     <Route path="/app/adduser" component={AddUserPage} />
                     <Route path="/app/schedule" component={SchedulePage} />
                     <Route path="/app/edit/:id" component={EditUserPage} />
                     <Route path="/app/reportsheet" component={ReportSheetPage} />
-                    <Route path="/app/news/create" component={CreateNewsPage} />
                     <Route path="/app/marks" component={Marks} />
                     <Route path="/app/users" component={Users} />
                 </Switch>

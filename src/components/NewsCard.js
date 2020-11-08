@@ -12,9 +12,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function RecipeReviewCard({onLike}) {
+export default function RecipeReviewCard({onLike, onEdit}) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
@@ -57,8 +56,8 @@ export default function RecipeReviewCard({onLike}) {
                     </Avatar>
                 }
                 action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
+                    <IconButton onClick={onEdit} aria-label="settings">
+                        <EditIcon />
                     </IconButton>
                 }
                 title="Išrinktas naujas direktorius"
