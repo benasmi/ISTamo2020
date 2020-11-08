@@ -94,7 +94,7 @@ export default function AddUserPage(){
           <div className={classes.paper}>
             
             <Typography component="h1" variant="h5">
-              Prideti nauja vartotoja
+              Pridėti naują vartotoją
             </Typography>
             <form className={classes.form} noValidate>
               <TextField
@@ -116,7 +116,7 @@ export default function AddUserPage(){
                 fullWidth
                 value={password}
                 name="password"
-                label="Slaptazodis"
+                label="Slaptažodis"
                 type="text"
                 value={password}
                 onChange={(event)=>setPassword(event.target.value)}
@@ -142,7 +142,7 @@ export default function AddUserPage(){
                 fullWidth
                 value={surname}
                 name="surname"
-                label="Pavarde"
+                label="Pavardė"
                 type="text"
                 value={surname}
                 onChange={(event)=>setSurname(event.target.value)}
@@ -150,7 +150,7 @@ export default function AddUserPage(){
               />
 
                 <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="classNr">Klase</InputLabel>
+                    <InputLabel htmlFor="classNr">Klasė</InputLabel>
                     <Select
                     native
                     value={state.classNr}
@@ -177,7 +177,7 @@ export default function AddUserPage(){
                 </FormControl>
 
                 <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="classLetter">Klases raide</InputLabel>
+                    <InputLabel htmlFor="classLetter">Klasės raidė</InputLabel>
                     <Select
                     native
                     value={state.classLetter}
@@ -211,14 +211,12 @@ export default function AddUserPage(){
                     >
                     <option aria-label="None" value="" />
                     <option value={"A"}>Mokinys</option>
-                    <option value={"B"}>Tevai</option>
+                    <option value={"B"}>Tėvas</option>
                     <option value={"C"}>Mokytojas</option>
                     <option value={"D"}>Administratorius</option>
                     </Select>
                 </FormControl>
 
-              
-              
               <Button
                 onClick={handleAction}
                 fullWidth

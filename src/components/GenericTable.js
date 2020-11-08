@@ -42,10 +42,22 @@ export const GenericTable = ({header, data, handleUpdate, handleRemove }) => {
                                     })
                                 }
                                 <TableCell component="th" align="left" scope="row">
-                                    <IconButton size={'small'} aria-label="delete" className={classes.margin}>
+                                    <IconButton
+                                        size={'small'}
+                                        onClick={()=>{
+                                            handleUpdate(row.id)
+                                        }}
+                                        aria-label="delete" className={classes.margin}>
                                         <EditIcon />
                                     </IconButton>
-                                    <IconButton size={'small'} aria-label="delete" className={classes.margin}>
+
+                                    <IconButton
+                                        size={'small'}
+                                        aria-label="delete"
+                                        onClick={()=>{
+                                            handleRemove(row.id)
+                                        }}
+                                        className={classes.margin}>
                                         <DeleteIcon />
                                     </IconButton>
                                 </TableCell>

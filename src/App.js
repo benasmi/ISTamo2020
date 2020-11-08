@@ -28,7 +28,9 @@ import MarkIcon from '@material-ui/icons/BorderColor';
 import EditUserPage from "./pages/EditUserPage";
 import ReportSheetPage from "./pages/ReportSheetPage";
 import ListAltIcon from '@material-ui/icons/ListAlt';
-
+import NewsPage1 from "./pages/NewsPage1";
+import CreateNewsPage from "./pages/CreateNewsPage";
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -143,28 +145,32 @@ export default function App() {
         <List component="nav">
           <ListItem component={Link} to="/app/news" button>
             <ListItemIcon><MenuBookIcon/></ListItemIcon>
-            <ListItemText>News</ListItemText>
+            <ListItemText>Naujienos</ListItemText>
           </ListItem>
           <ListItem button component={Link} to="/app/schedule">
             <ListItemIcon><ScheduleIcon/></ListItemIcon>
-            <ListItemText>Schedule</ListItemText>
+            <ListItemText>Tvarkaraštis</ListItemText>
           </ListItem>
           <ListItem button component={Link} to="/app/marks">
             <ListItemIcon><MarkIcon/></ListItemIcon>
-            <ListItemText>Marks</ListItemText>
+            <ListItemText>Pažymiai</ListItemText>
           </ListItem>
           <Divider />
           <ListItem button component={Link} to="/app/adduser">
             <ListItemIcon><PersonIcon/></ListItemIcon>
-            <ListItemText>Add users</ListItemText>
+            <ListItemText>Sukurti vartotoją</ListItemText>
           </ListItem>
           <ListItem button component={Link} to="/app/users">
             <ListItemIcon><PersonIcon/></ListItemIcon>
-            <ListItemText>All users</ListItemText>
+            <ListItemText>Vartotojai</ListItemText>
           </ListItem>
           <ListItem button component={Link} to="/app/reportsheet">
             <ListItemIcon><ListAltIcon/></ListItemIcon>
-            <ListItemText>Report sheet</ListItemText>
+            <ListItemText>Formuoti ataskaitą</ListItemText>
+          </ListItem>
+          <ListItem button component={Link} to="/app/news/create">
+            <ListItemIcon><NoteAddIcon/></ListItemIcon>
+            <ListItemText>Sukurti naujieną</ListItemText>
           </ListItem>
         </List>
         <Divider />
@@ -176,11 +182,12 @@ export default function App() {
       >
         <div className={classes.drawerHeader} />
                 <Switch>
-                    <Route exact path="/app/news" component={NewsPage} />
+                    <Route exact path="/app/news" component={NewsPage1} />
                     <Route path="/app/adduser" component={AddUserPage} />
                     <Route path="/app/schedule" component={SchedulePage} />
                     <Route path="/app/edit/:id" component={EditUserPage} />
                     <Route path="/app/reportsheet" component={ReportSheetPage} />
+                    <Route path="/app/news/create" component={CreateNewsPage} />
                     <Route path="/app/marks" component={Marks} />
                     <Route path="/app/users" component={Users} />
                 </Switch>

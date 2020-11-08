@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { GenericTable } from "../components/GenericTable";
 import fakeData from "../data/UsersData.json";
 import {useHistory} from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 
 
 export default function AllUsersPage(){
@@ -21,6 +22,11 @@ export default function AllUsersPage(){
 
     return (
           <div>
+              <Typography variant={'h4'}>
+                    Vartotojų lentelė
+              </Typography>
+              <br/>
+              <br/>
             <GenericTable
                 data={usersData}
                 header={tableHeader}
