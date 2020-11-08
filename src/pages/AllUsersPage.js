@@ -3,6 +3,8 @@ import { GenericTable } from "../components/GenericTable";
 import fakeData from "../data/UsersData.json";
 import {useHistory} from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
 
 
 export default function AllUsersPage(){
@@ -21,19 +23,31 @@ export default function AllUsersPage(){
     const [usersData, setUsersData] = useState(fakeData);
 
     return (
-          <div>
-              <Typography variant={'h4'}>
+        <>
+            <div>
+                <Typography variant={'h4'}>
                     Vartotojų lentelė
-              </Typography>
-              <br/>
-              <br/>
-            <GenericTable
-                data={usersData}
-                header={tableHeader}
-                handleRemove={(id)=>{}}
-                handleUpdate={(id)=>{
-                    history.push(`/app/edit/${id}`)}}
-            />
-          </div>
+                </Typography>
+                <Button
+                    startIcon={<AddIcon/>}
+                    color='primary'
+                    onClick={()=>{
+                        history.push('/app/adduser')
+                    }}>
+                    Sukurti vartotoją
+                </Button>
+                <br/>
+                <br/>
+            </div>
+            <div>
+                <GenericTable
+                    data={usersData}
+                    header={tableHeader}
+                    handleRemove={(id)=>{}}
+                    handleUpdate={(id)=>{
+                        history.push(`/app/edit/${id}`)}}
+                />
+            </div>
+        </>
       );
 }

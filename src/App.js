@@ -32,6 +32,10 @@ import NewsPage1 from "./pages/NewsPage1";
 import CreateNewsPage from "./pages/CreateNewsPage";
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import EditNewsPage from "./pages/EditNewsPage";
+import EditNewMarkPage from "./pages/EditNewMarkPage";
+import CreateNewMarkPage from "./pages/CreateNewMarkPage";
+import CalculateAverageReportPage from "./pages/CalculateAverageReportPage";
+import RatingsPage from "./pages/RatingsPage";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -190,6 +194,10 @@ export default function App() {
                     <Route path="/app/schedule" component={SchedulePage} />
                     <Route path="/app/edit/:id" component={EditUserPage} />
                     <Route path="/app/reportsheet" component={ReportSheetPage} />
+                    <Route exact path="/app/marks/average" component={CalculateAverageReportPage} />
+                    <Route exact path="/app/marks/ratings" component={RatingsPage} />
+                    <Route exact path="/app/marks/create" component={CreateNewMarkPage} />
+                    <Route exact path="/app/marks/:id" component={EditNewMarkPage} />
                     <Route path="/app/marks" component={Marks} />
                     <Route path="/app/users" component={Users} />
                 </Switch>
