@@ -226,7 +226,7 @@ export default function AddUserPage(){
                 color="primary"
                 className={classes.submit}
               >
-                Prideti
+                Pridėti
               </Button>
               
             </form>
