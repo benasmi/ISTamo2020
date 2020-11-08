@@ -1,41 +1,60 @@
 import React, { useState } from "react";
-import { Table } from "rsuite-table";
-import { Column } from "rsuite-table";
-import { HeaderCell } from "rsuite-table";
-import { Cell } from "rsuite-table";
-import "rsuite-table/dist/css/rsuite-table.css";
-import Button from "@material-ui/core/Button";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import Paper from "@material-ui/core/Paper";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Table from "@material-ui/core/Table";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableBody from "@material-ui/core/TableBody";
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+
+const useStyles = makeStyles({
+    table: {
+        minWidth: 650,
+    },
+});
 
 export const GenericTable = ({header, data, handleUpdate, handleRemove }) => {
-
+    const classes = useStyles();
     return (
-      <Table data={data} height={50*data.length} width={((data.length-1) * 90)}>
-          {header.map(headCell=>{
-              return (
-                  <Column align="center" width={100} >
-                      <HeaderCell>{headCell.label}</HeaderCell>
-                      <Cell dataKey={headCell.id} />
-                  </Column>
-              )
-          })}
-        <Column align="center" width={200}>
-          <HeaderCell>Veiksmai</HeaderCell>
-          <Cell>
-              {(rowData, rowIndex) => {
-                  return (
-                      <span>
-                        <Button color='primary' onClick={()=>{handleUpdate(data[rowIndex].id)}}>
-                             Keisti
-                        </Button>
-                        <Button color='secondary' onClick={()=>{handleRemove(data[rowIndex].id)}}>
-                             Naikinti
-                        </Button>
-                </span>
-                  )
-              }}
+        <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        {header.map(headCell=>{
+                            return <TableCell align="let">{headCell.label}</TableCell>
+                        })}
+                        <TableCell align="let">Veiksmai</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {data.map((row) =>{
+                        return (
+                            <TableRow key={row.name}>
+                                {
+                                    header.map(head =>{
+                                        return  <TableCell component="th" align="left" scope="row">
+                                            {row[head.id]}
+                                        </TableCell>
+                                    })
+                                }
+                                <TableCell component="th" align="left" scope="row">
+                                    <IconButton size={'small'} aria-label="delete" className={classes.margin}>
+                                        <EditIcon />
+                                    </IconButton>
+                                    <IconButton size={'small'} aria-label="delete" className={classes.margin}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </TableCell>
+                            </TableRow>
+                        )
+                    })}
 
-          </Cell>
-        </Column>
-      </Table>
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
   };

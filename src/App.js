@@ -153,6 +153,7 @@ export default function App() {
             <ListItemIcon><MarkIcon/></ListItemIcon>
             <ListItemText>Marks</ListItemText>
           </ListItem>
+          <Divider />
           <ListItem button component={Link} to="/app/adduser">
             <ListItemIcon><PersonIcon/></ListItemIcon>
             <ListItemText>Add users</ListItemText>
