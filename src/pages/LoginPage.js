@@ -81,7 +81,7 @@ export default function LoginPage() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Prisijungti
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -90,7 +90,7 @@ export default function LoginPage() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Vartotojo vardas"
             name="email"
             value={username}
             onChange={(event)=>setUsername(event.target.value)}
@@ -104,7 +104,7 @@ export default function LoginPage() {
             fullWidth
             value={password}
             name="password"
-            label="Password"
+            label="Slaptazodis"
             type="password"
             value={password}
             onChange={(event)=>setPassword(event.target.value)}
@@ -113,7 +113,7 @@ export default function LoginPage() {
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            label="Prisiminti mane"
           />
           <Button
             onClick={dummyLogin}
@@ -122,17 +122,17 @@ export default function LoginPage() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Prisijungti
           </Button>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Forgot password?
+                Pamirsote slaptazodi?
               </Link>
             </Grid>
             <Grid item>
               <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"Neturite paskyros? Spauskite cia"}
               </Link>
             </Grid>
           </Grid>

@@ -18,13 +18,33 @@ import ListItemText from '@material-ui/core/ListItemText';
 import NewsPage from './pages/NewsPage';
 import AddUserPage from './pages/AddUserPage';
 import SchedulePage from './pages/SchedulePage';
+import Marks from './pages/Marks';
+import Users from './pages/AllUsersPage';
 import {Route, Switch, Link } from "react-router-dom";
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import PersonIcon from '@material-ui/icons/Person';
+import MarkIcon from '@material-ui/icons/BorderColor';
+import EditUserPage from "./pages/EditUserPage";
+import ReportSheetPage from "./pages/ReportSheetPage";
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import NewsPage1 from "./pages/NewsPage1";
+import CreateNewsPage from "./pages/CreateNewsPage";
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
+import EditNewsPage from "./pages/EditNewsPage";
+import EditNewMarkPage from "./pages/EditNewMarkPage";
+import CreateNewMarkPage from "./pages/CreateNewMarkPage";
+import CalculateAverageReportPage from "./pages/CalculateAverageReportPage";
+import RatingsPage from "./pages/RatingsPage";
+import ScheduleEditPage from "./pages/ScheduleEditPage";
+import ScheduleAddPage from "./pages/ScheduleAddPage";
+import ScheduleAddTest from "./pages/ScheduleAddTest";
+import ScheduleReportPage from "./pages/ScheduleReportPage";
+import SettingsPage from "./pages/SettingsPage";
+import SettingsIcon from '@material-ui/icons/Settings';
+
 
 const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -137,16 +157,37 @@ export default function App() {
         <List component="nav">
           <ListItem component={Link} to="/app/news" button>
             <ListItemIcon><MenuBookIcon/></ListItemIcon>
-            <ListItemText>News</ListItemText>
+            <ListItemText>Naujienos</ListItemText>
           </ListItem>
           <ListItem button component={Link} to="/app/schedule">
             <ListItemIcon><ScheduleIcon/></ListItemIcon>
-            <ListItemText>Schedule</ListItemText>
+            <ListItemText>Tvarkaraštis</ListItemText>
           </ListItem>
+          <ListItem button component={Link} to="/app/marks">
+            <ListItemIcon><MarkIcon/></ListItemIcon>
+            <ListItemText>Pažymiai</ListItemText>
+          </ListItem>
+          <Divider />
           <ListItem button component={Link} to="/app/adduser">
             <ListItemIcon><PersonIcon/></ListItemIcon>
-            <ListItemText>Add users</ListItemText>
+            <ListItemText>Sukurti vartotoją</ListItemText>
           </ListItem>
+          <ListItem button component={Link} to="/app/users">
+            <ListItemIcon><PersonIcon/></ListItemIcon>
+            <ListItemText>Vartotojai</ListItemText>
+          </ListItem>
+          <ListItem button component={Link} to="/app/reportsheet">
+            <ListItemIcon><ListAltIcon/></ListItemIcon>
+            <ListItemText>Formuoti ataskaitą</ListItemText>
+          </ListItem>
+          <ListItem button component={Link} to="/app/news/create">
+            <ListItemIcon><NoteAddIcon/></ListItemIcon>
+            <ListItemText>Sukurti naujieną</ListItemText>
+          </ListItem>
+            <ListItem button component={Link} to="/app/settings">
+                <ListItemIcon><SettingsIcon/></ListItemIcon>
+                <ListItemText>Nustatymai</ListItemText>
+            </ListItem>
         </List>
         <Divider />
       </Drawer>
@@ -157,9 +198,28 @@ export default function App() {
       >
         <div className={classes.drawerHeader} />
                 <Switch>
-                    <Route exact path="/app/news" component={NewsPage} />
+                    <Route path="/app/settings" component={SettingsPage} />
+                    <Route exact path="/app/news" component={NewsPage1} />
+                    <Route path="/app/news/create" component={CreateNewsPage} />
+                    <Route exact path="/app/news/:id" component={EditNewsPage} />
                     <Route path="/app/adduser" component={AddUserPage} />
+
+                    <Route exact path="/app/schedule" component={SchedulePage} />
+                    <Route exact path="/app/schedule/create" component={ScheduleAddPage} />
+                    <Route exact path="/app/schedule/test" component={ScheduleAddTest} />
+                    <Route exact path="/app/schedule/report" component={ScheduleReportPage} />
+                    <Route exact path="/app/schedule/:id" component={ScheduleEditPage} />
+
                     <Route path="/app/schedule" component={SchedulePage} />
+                    <Route path="/app/edit/:id" component={EditUserPage} />
+                    <Route path="/app/reportsheet" component={ReportSheetPage} />
+
+                    <Route exact path="/app/marks/average" component={CalculateAverageReportPage} />
+                    <Route exact path="/app/marks/ratings" component={RatingsPage} />
+                    <Route exact path="/app/marks/create" component={CreateNewMarkPage} />
+                    <Route exact path="/app/marks/:id" component={EditNewMarkPage} />
+                    <Route path="/app/marks" component={Marks} />
+                    <Route path="/app/users" component={Users} />
                 </Switch>
       </main>
     </div>
