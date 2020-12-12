@@ -6,6 +6,7 @@ const Auth = {login};
 
 
 const getNews = () => RequestType.getRequest("news/");
+const insertNews = (payload) => RequestType.postRequest("news/", payload);
 const News = {getNews};
 
 const API = {Auth, News};
