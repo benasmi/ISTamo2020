@@ -63,8 +63,8 @@ export default function LoginPage() {
 
 
   function dummyLogin(){
-    API.Auth.login({email: username, password}).then(response=>{
-          localStorage.setItem("username", username);
+    API.Auth.login({email: username, password}).then(jwt=>{
+          localStorage.setItem("token", jwt);
           history.push("/app/news")
     }).catch(()=>{
       console.log("Failed to login");

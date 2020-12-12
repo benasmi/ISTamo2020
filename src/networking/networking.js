@@ -1,13 +1,15 @@
 import React from "react";
 import axios from "axios"
 import history from "../helpers/history";
+import {getAccessToken} from "../helpers/tokenStorage";
 
 const request = async function (options, contentType) {
 
     const header = {
         'Content-Type': (contentType == null) ? 'application/json' : contentType,
         'Accept': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': `Bearer ${getAccessToken()}`
     };
 
     const client = axios.create({
