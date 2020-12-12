@@ -16,6 +16,7 @@ import {isAuthenticated} from '../helpers/tokenStorage'
 import Redirect from "react-router-dom/es/Redirect";
 import history from '../helpers/history'
 import { useHistory } from "react-router-dom";
+import API from "../networking/api";
 
 function Copyright() {
   return (
@@ -62,11 +63,12 @@ export default function LoginPage() {
 
 
   function dummyLogin(){
-    if(username === 'test' && password === 'test'){
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
-        history.push("/app/news")
-    }
+    API.Auth.login({email: username, password}).then(response=>{
+          localStorage.setItem("username", username);
+          history.push("/app/news")
+    }).catch(()=>{
+      console.log("Failed to login");
+    });
   }
 
   if (isAuthenticated()) {

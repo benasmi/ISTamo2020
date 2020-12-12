@@ -1,6 +1,6 @@
-import RequestType from '../Networking/NetworkLayerCentral'
+import RequestType from "./networking";
 
-//Places
+// Auth
 const login = (payload) => RequestType.postRequest("auth/login", payload);
 const Auth = {login};
 
