@@ -15,7 +15,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import NewsPage from './pages/NewsPage';
 import AddUserPage from './pages/AddUserPage';
 import SchedulePage from './pages/SchedulePage';
 import Marks from './pages/Marks';
@@ -25,14 +24,12 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import PersonIcon from '@material-ui/icons/Person';
 import MarkIcon from '@material-ui/icons/BorderColor';
-import EditUserPage from "./pages/EditUserPage";
 import ReportSheetPage from "./pages/ReportSheetPage";
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import NewsPage1 from "./pages/NewsPage1";
 import CreateNewsPage from "./pages/CreateNewsPage";
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import EditNewsPage from "./pages/EditNewsPage";
-import EditNewMarkPage from "./pages/EditNewMarkPage";
 import CreateNewMarkPage from "./pages/CreateNewMarkPage";
 import CalculateAverageReportPage from "./pages/CalculateAverageReportPage";
 import RatingsPage from "./pages/RatingsPage";
@@ -168,7 +165,7 @@ export default function App() {
             <ListItemText>Pažymiai</ListItemText>
           </ListItem>
           <Divider />
-          <ListItem button component={Link} to="/app/adduser">
+          <ListItem button component={Link} to="/app/adduser/">
             <ListItemIcon><PersonIcon/></ListItemIcon>
             <ListItemText>Sukurti vartotoją</ListItemText>
           </ListItem>
@@ -202,7 +199,7 @@ export default function App() {
                     <Route exact path="/app/news" component={NewsPage1} />
                     <Route path="/app/news/create" component={CreateNewsPage} />
                     <Route exact path="/app/news/:id" component={EditNewsPage} />
-                    <Route path="/app/adduser" component={AddUserPage} />
+                    <Route path="/app/adduser/:id?" component={AddUserPage} />
 
                     <Route exact path="/app/schedule" component={SchedulePage} />
                     <Route exact path="/app/schedule/create" component={ScheduleAddPage} />
@@ -211,13 +208,11 @@ export default function App() {
                     <Route exact path="/app/schedule/:id" component={ScheduleEditPage} />
 
                     <Route path="/app/schedule" component={SchedulePage} />
-                    <Route path="/app/edit/:id" component={EditUserPage} />
                     <Route path="/app/reportsheet" component={ReportSheetPage} />
 
                     <Route exact path="/app/marks/average" component={CalculateAverageReportPage} />
                     <Route exact path="/app/marks/ratings" component={RatingsPage} />
-                    <Route exact path="/app/marks/create" component={CreateNewMarkPage} />
-                    <Route exact path="/app/marks/:id" component={EditNewMarkPage} />
+                    <Route exact path="/app/marks/create/:id?" component={CreateNewMarkPage} />
                     <Route path="/app/marks" component={Marks} />
                     <Route path="/app/users" component={Users} />
                 </Switch>

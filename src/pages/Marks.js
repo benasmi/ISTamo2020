@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {GenericTable} from "../components/GenericTable";
 import fakeData from "../data/MarksData.json";
 import Typography from "@material-ui/core/Typography";
@@ -7,33 +7,47 @@ import AddIcon from "@material-ui/icons/Add";
 import {useHistory} from "react-router-dom";
 import GradeIcon from '@material-ui/icons/Grade';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import API from "../networking/api";
+import Chip from "@material-ui/core/Chip";
+import * as moment from "moment";
 
 export default function Marks(){
     let history = useHistory();
-    const tableHeader = [
-        {id: "id", label: "Id"},
-        {id: "subject", label: "Dalykas"},
-        {id: "week", label: "Savaitė"},
-        {id: "w1", label: "1"},
-        {id: "w2", label: "2"},
-        {id: "w3", label: "3"},
-        {id: "w4", label: "4"},
-        {id: "w5", label: "5"},
-        {id: "w6", label: "6"},
-        {id: "w7", label: "7"},
-        {id: "w8", label: "8"},
-        {id: "w9", label: "9"},
-        {id: "w10", label: "10"},
-        {id: "w11", label: "11"},
-        {id: "w12", label: "12"},
-        {id: "w13", label: "13"},
-        {id: "w14", label: "14"},
-        {id: "w15", label: "15"},
-        {id: "w16", label: "16"},
-    ]
 
-    const [marks, setMarks] = useState(fakeData);
+    const [marks, setMarks] = useState(undefined);
 
+    useEffect(()=>{
+        API.Marks.getMarks().then(response=>{
+            console.log(response);
+            setMarks(response)
+        }).catch(()=>{
+
+        })
+    },[])
+
+
+    function renderMakrs(){
+        if(!marks){
+            return null;
+        }
+        return marks.map(subject=>{
+            return <div style={{marginTop: 64}}>
+                <Typography variant="h3">
+                    {`${subject.name} - ${subject.hours} valandų`}
+                </Typography>
+                <div>
+                    {subject.marks.map(mark =>{
+                        return <Chip  onClick={()=>editMark(mark)} style={{marginLeft: 8}} label={`${mark.mark} | ${mark.mark_type} - ${moment(mark.insertion_date).format("LL")}`} key={mark.id} />
+                    })}
+                </div>
+            </div>
+        })
+    }
+
+    function editMark(mark){
+        console.log(mark);
+        history.push(`/app/marks/create/${mark.id}`)
+    }
 
     return (
         <>
@@ -76,16 +90,7 @@ export default function Marks(){
 
         </div>
         <div style={{marginTop: 32}}>
-              <GenericTable
-                  data={marks}
-                  header={tableHeader}
-                  handleRemove={()=>{
-                  }}
-                  handleUpdate={()=>{
-                      history.push(`/app/marks/${1}`)
-
-                  }}
-              />
+            {renderMakrs()}
         </div>
 
         </>

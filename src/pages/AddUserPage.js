@@ -1,22 +1,20 @@
-import React, {useState} from 'react';
-import Avatar from '@material-ui/core/Avatar';
+import React, {useContext, useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import API from "../networking/api";
+import {useParams} from "react-router";
+import {useHistory} from "react-router-dom";
+import {ToastContext} from "../contexts/ToastContext";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import Chip from "@material-ui/core/Chip";
 
 
 
@@ -66,27 +64,81 @@ export default function AddUserPage(){
     const [password, setPassword] = useState('');
     const [firstname, setName] = useState('');
     const [surname, setSurname] = useState('');
+    const [role, setRole] = useState('');
 
-    const [state, setState] = React.useState({
-        classNr: '',
-        classLetter: '',
-        UserType: '',
-        name: 'hai',
-    });
+    const [availableSubjects, setAvailableSubjects] = useState([]);
+    const [selectedSubjects, setSelectedSubjects] = useState([]);
 
-    const handleChange = (event) => {
-        const name = event.target.name;
-        setState({
-        ...state,
-        [name]: event.target.value,
-        });
-    };
+    let { id } = useParams();
+    let history = useHistory();
+
+    const {addConfig} = useContext(ToastContext);
+
+    useEffect(()=>{
+        if(id){
+            API.Users.findOneUser(`/${id}`).then(user=>{
+               setUsername(user.email);
+               setName(user.name);
+               setSurname(user.surname);
+               setRole(user.roleId);
+               if(user.subjects){
+                   setSelectedSubjects(user.subjects)
+                   getAvailableSubjects(user.subjects)
+               }else{
+                   getAvailableSubjects([]);
+               }
+
+            }).catch(err=>{
+
+            });
+        }
+
+        getAvailableSubjects([]);
 
 
+    },[id]);
+
+    function getAvailableSubjects(alreadySelected){
+        API.Subjects.getSubjects().then(subjects =>{
+            console.log({alreadySelected, subjects});
+            for(let i = 0; i<alreadySelected.length; i++){
+                subjects = subjects.filter(row=>row.id!==alreadySelected[i].id);
+            }
+            setAvailableSubjects(subjects)
+        }).catch(()=>{
+            addConfig(false, "Klaida gaunant dalykus!");
+        })
+    }
 
     function handleAction() {
-        alert(`Pridedamas vartotojas`);
+        const ids = selectedSubjects.map(row=>row.id);
+        if(id){
+            API.Users.updateUsers({subjects: ids, birthday: "1999-08-08", address:"Address", id_code: 123, name: firstname, surname: surname, email: username, password: password, roleId: role, id:id}).then(response=>{
+                history.push('/app/users')
+                addConfig(true, "Vartotojas sėkmingai atnaujintas!")
+            }).catch(()=>{
+                addConfig(false, "Klaida!")
+            });
+        }else{
+            API.Users.insertUser(
+                {subjects: ids, birthday: "1999-08-08", address:"Address", id_code: 123, name: firstname, surname: surname, email: username, password: password, roleId: role }).then(r =>{
+                history.push('/app/users')
+                addConfig(true, "Vartotojas sėkmingai pridėtas!")
+            }).catch(()=>{
+                addConfig(false, "Klaida!")
+            })
+        }
       }
+
+    function handleInput(value){
+        setSelectedSubjects([...selectedSubjects, value]);
+        setAvailableSubjects(availableSubjects.filter(row=>row.id!==value.id))
+    }
+
+    function deselectChip(chip) {
+        setSelectedSubjects(selectedSubjects.filter(row=>row.id!==chip.id));
+        setAvailableSubjects(oldVal=>[...availableSubjects, chip])
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -94,7 +146,7 @@ export default function AddUserPage(){
           <div className={classes.paper}>
             
             <Typography component="h1" variant="h5">
-              Pridėti naują vartotoją
+                {id ? 'Atnaujinti vartotoją' : 'Pridėti naują vartotoją'}
             </Typography>
             <form className={classes.form} noValidate>
               <TextField
@@ -105,23 +157,24 @@ export default function AddUserPage(){
                 id="email"
                 label="Vartotojo vardas"
                 name="email"
+                disabled={!!id}
                 value={username}
                 onChange={(event)=>setUsername(event.target.value)}
                 autoFocus
               />
-              <TextField
+                {!id && <TextField
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
+                disabled={!!id}
                 value={password}
                 name="password"
                 label="Slaptažodis"
-                type="text"
-                value={password}
+                type="password"
                 onChange={(event)=>setPassword(event.target.value)}
                 id="password"
-              />
+              />}
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -131,7 +184,6 @@ export default function AddUserPage(){
                 name="firstname"
                 label="Vardas"
                 type="text"
-                value={firstname}
                 onChange={(event)=>setName(event.target.value)}
                 id="firstname"
               />
@@ -144,78 +196,41 @@ export default function AddUserPage(){
                 name="surname"
                 label="Pavardė"
                 type="text"
-                value={surname}
                 onChange={(event)=>setSurname(event.target.value)}
                 id="surname"
               />
 
                 <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="classNr">Klasė</InputLabel>
-                    <Select
-                    native
-                    value={state.classNr}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'classNr',
-                        id: 'classNr',
-                    }}
-                    >
-                    <option aria-label="None" value="" />
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
-                    <option value={5}>5</option>
-                    <option value={6}>6</option>
-                    <option value={7}>7</option>
-                    <option value={8}>8</option>
-                    <option value={9}>9</option>
-                    <option value={10}>10</option>
-                    <option value={11}>11</option>
-                    <option value={12}>12</option>
-                    </Select>
-                </FormControl>
-
-                <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="classLetter">Klasės raidė</InputLabel>
-                    <Select
-                    native
-                    value={state.classLetter}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'classLetter',
-                        id: 'classLetter',
-                    }}
-                    >
-                    <option aria-label="None" value="" />
-                    <option value={"A"}>A</option>
-                    <option value={"B"}>B</option>
-                    <option value={"C"}>C</option>
-                    <option value={"D"}>D</option>
-                    <option value={"E"}>E</option>
-                    <option value={"F"}>F</option>
-                    <option value={"G"}>G</option>
-                    </Select>
-                </FormControl>
-
-                <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="UserType">Vartotojo tipas</InputLabel>
                     <Select
                     native
-                    value={state.UserType}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'UserType',
-                        id: 'UserType',
-                    }}
-                    >
+                    value={role}
+                    onChange={(event)=>setRole(event.target.value)}>
                     <option aria-label="None" value="" />
-                    <option value={"A"}>Mokinys</option>
-                    <option value={"B"}>Tėvas</option>
-                    <option value={"C"}>Mokytojas</option>
-                    <option value={"D"}>Administratorius</option>
+                    <option value={1}>Mokinys</option>
+                    <option value={2}>Tėvas</option>
+                    <option value={3}>Mokytojas</option>
+                    <option value={4}>Administratorius</option>
                     </Select>
                 </FormControl>
+
+
+
+                <div style={{marginTop: 16}}>
+                    {selectedSubjects.map(row=>{
+                        return <Chip  style={{marginLeft: 8}} onDelete={() => deselectChip(row)} label={row.name} key={row.id} />
+                    })}
+                </div>
+
+                <Autocomplete
+                    id="combo-box-demo"
+                    disableClearable
+                    onChange={(_, selected) => handleInput(selected)}
+                    options={availableSubjects}
+                    getOptionLabel={(option) => option.name}
+                    style={{ width: 300, marginTop: 24 }}
+                    renderInput={(params) => <TextField {...params} label="Dalykai" variant="outlined" />}
+                />
 
               <Button
                 onClick={handleAction}
@@ -224,7 +239,7 @@ export default function AddUserPage(){
                 color="primary"
                 className={classes.submit}
               >
-                Pridėti
+                  {id ? 'Atnaujinti' : 'Pridėti'}
               </Button>
               
             </form>

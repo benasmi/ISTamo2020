@@ -66,8 +66,25 @@ const postMultipartRequest = function (path, formData) {
     }, 'multipart/form-data');
 };
 
+const patchRequest = function (path, data, urlData = "") {
+    console.log({path, data});
+    return request({
+        url: path + urlData,
+        method: 'PATCH',
+        data: data
+    }, null);
+};
+
+const deleteRequest = function (path, data, urlData = "") {
+    return request({
+        url: path + urlData,
+        method: 'DELETE',
+        data: data
+    }, null);
+};
+
 const RequestType = {
-    getRequest, postRequest, postMultipartRequest
+    getRequest, postRequest, postMultipartRequest, patchRequest, deleteRequest
 };
 
 export default RequestType

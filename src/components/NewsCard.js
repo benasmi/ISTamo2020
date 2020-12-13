@@ -14,6 +14,7 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit';
+import * as moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function RecipeReviewCard({onLike, onEdit, content, title, date}) {
+export default function RecipeReviewCard({onLike, onEdit, content, title, date, id, upvotesCount, upvoted}) {
     const classes = useStyles();
     return (
         <Card className={classes.root}>
@@ -50,12 +51,12 @@ export default function RecipeReviewCard({onLike, onEdit, content, title, date})
                     </Avatar>
                 }
                 action={
-                    <IconButton onClick={onEdit} aria-label="settings">
+                    <IconButton onClick={()=>{onEdit(id)}} aria-label="settings">
                         <EditIcon />
                     </IconButton>
                 }
                 title={title}
-                subheader={date}
+                subheader={moment(date).format("LL")}
             />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
@@ -63,9 +64,12 @@ export default function RecipeReviewCard({onLike, onEdit, content, title, date})
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton onClick={onLike} aria-label="add to favorites">
-                    <FavoriteIcon />
+                <IconButton onClick={()=>{onLike(id, upvoted)}} aria-label="add to favorites">
+                    <FavoriteIcon color={upvoted ? "primary": 'gray'} />
                 </IconButton>
+                <Typography>
+                    {upvotesCount}
+                </Typography>
             </CardActions>
 
         </Card>

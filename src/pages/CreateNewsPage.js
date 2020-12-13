@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
@@ -9,6 +9,9 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import {makeStyles} from "@material-ui/core/styles";
+import API from "../networking/api";
+import {useHistory} from "react-router-dom";
+import {ToastContext} from "../contexts/ToastContext";
 
 
 
@@ -31,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateNewsPage(){
     const classes = useStyles();
+    let history = useHistory();
+
+    const {addConfig} = useContext(ToastContext);
     const [creatingNew, setCreatingNew] = useState(
         {
             title: '',
@@ -47,7 +53,12 @@ export default function CreateNewsPage(){
     }
 
     function publishNew() {
-        A
+        API.News.insertNews({...creatingNew}).then(response=>{
+            history.push('/app/news')
+            addConfig(true, "Naujiena sėkmingai pridėta!")
+        }).catch(err=>{
+            addConfig(false, 'Klaida!')
+        })
     }
 
     return (
