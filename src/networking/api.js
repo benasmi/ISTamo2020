@@ -24,8 +24,6 @@ const Users = {insertUser, getUsers, updateUsers, findOneUser, deleteUser, getMe
 const getSettings = () => RequestType.getRequest("system/");
 const updateSettings = (payload) => RequestType.patchRequest("system/", payload);
 const getReport = () =>RequestType.getRequest("reports");
-
-
 const System = {getSettings, updateSettings, getReport};
 
 
@@ -42,9 +40,18 @@ const getRatings = () =>RequestType.getRequest("marks/rating");
 const Marks = {getMarks, insertMark, getMark, updateMark, getRatings};
 
 
+//Schedule
+const getSchedule = ()=> RequestType.getRequest("schedule/");
+const getGlobalSchedule = ()=> RequestType.getRequest("schedule/global");
+const addScheduleToSubject = (payload) => RequestType.postRequest("schedule/", payload);
+const getScheduleForEditing = (requestParameters) =>RequestType.getRequest("schedule/get/", requestParameters);
+const updateSchedule = (payload) =>RequestType.patchRequest("schedule/", payload);
+const Schedule = {getSchedule, addScheduleToSubject, getGlobalSchedule, getScheduleForEditing, updateSchedule};
 
+//Rooms
+const getRooms = ()=> RequestType.getRequest("schedule/rooms");
+const Rooms = {getRooms}
 
-
-const API = {Auth, News, Users, System, Subjects, Marks};
+const API = {Auth, News, Users, System, Subjects, Marks, Schedule, Rooms};
 
 export default API

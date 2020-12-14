@@ -61,6 +61,11 @@ export default function EditNewsPage(){
     },[id]);
 
     function updateNew() {
+        if(updatingNew.title.length === 0 || updatingNew.content.length === 0){
+            addConfig(false, "Klaida!@");
+            return;
+        }
+
         API.News.updateNews({...updatingNew}).then(response=>{
             history.push(`/app/news`)
             addConfig(true, "Naujiena sėkmingai atnaujinta");

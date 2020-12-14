@@ -32,7 +32,7 @@ export default function Marks(){
         }
         return marks.map(subject=>{
             return <div style={{marginTop: 64}}>
-                <Typography variant="h3">
+                <Typography variant="h5">
                     {`${subject.name} - ${subject.hours} valandų`}
                 </Typography>
                 <div>

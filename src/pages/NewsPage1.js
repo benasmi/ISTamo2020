@@ -83,7 +83,8 @@ export default function NewsPage1(){
 
     function manageUpvote(id, upvoted){
         const currentNew = news.find(row => row.id === id);
-        API.News.upvoteNew({id: currentNew.id, fk_userId: currentNew.fk_userId}).then(response=>{
+
+        API.News.upvoteNew({newsId: currentNew.id}).then(response=>{
 
         }).catch(err=>{
             addConfig(false, "Klaida!")

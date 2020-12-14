@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Table from '@material-ui/core/Table';
 import {GenericTable} from "../components/GenericTable";
 import ScheduleData from '../data/ScheduleData.json'
@@ -8,23 +8,59 @@ import AddIcon from "@material-ui/icons/Add";
 import GradeIcon from "@material-ui/icons/Grade";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import {useHistory} from "react-router-dom";
+import API from "../networking/api";
+import Chip from "@material-ui/core/Chip";
+import * as moment from "moment";
 
 
-
+export function parseSchedule(num){
+    switch (num) {
+        case 1:
+            return 'Pirmadienis'
+        case 2:
+            return 'Atradienis'
+        case 3:
+            return 'Trečiadienis'
+        case 4:
+            return 'Ketvirtadienis'
+        case 5:
+            return 'Penktadienis'
+    }
+}
 
 export default function SchedulePage(){
     let history = useHistory();
+    const [scheduleData, setScheduleData] = useState([]);
 
-    const [scheduleDate, setScheduleData] = useState(ScheduleData)
-    const tableHeader = [
-        {id: "time", label: "Laikas"},
-        {id: "mon", label: "Pirmadienis"},
-        {id: "tue", label: "Antradienis"},
-        {id: "wed", label: "Trečiadienis"},
-        {id: "thu", label: "Ketvirtadienis"},
-        {id: "fri", label: "Penktadienis"}
-    ]
+    useEffect(()=>{
+        API.Schedule.getSchedule().then(response=>{
+            setScheduleData(response)
+        }).catch(err=>{
 
+        })
+
+    },[])
+
+
+
+    function editSchedule(subjectTime){
+        history.push(`/app/schedule/create/${subjectTime.id}`)
+    }
+
+    function ScheduleData(){
+        return scheduleData.map(subject=>{
+            return <div style={{marginTop: 32}}>
+                <Typography variant='h5'>
+                    {subject.name} - {subject.description}({subject.hours}H)
+                </Typography>
+                <div>
+                    {subject.schedule.map(subjectTime =>{
+                        return <Chip  onClick={()=>editSchedule(subjectTime)} style={{marginLeft: 8}} label={`${parseSchedule(subjectTime.week_day)} - ${subjectTime.subject_time} | ${subjectTime.room.description}(${subjectTime.room.name})`} key={subjectTime.id} />
+                    })}
+                </div>
+            </div>
+        })
+    }
 
     return (
             <>
@@ -69,14 +105,7 @@ export default function SchedulePage(){
 
 
           <div style={{marginTop: 32}}>
-              <GenericTable
-                  header={tableHeader}
-                  data={scheduleDate}
-                  handleUpdate={()=>{
-                      history.push('/app/schedule/1')
-                  }}
-                  handleRemove={()=>{}}
-              />
+              {ScheduleData()}
           </div>
                 </>
           

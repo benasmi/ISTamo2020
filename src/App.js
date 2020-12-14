@@ -33,7 +33,6 @@ import EditNewsPage from "./pages/EditNewsPage";
 import CreateNewMarkPage from "./pages/CreateNewMarkPage";
 import CalculateAverageReportPage from "./pages/CalculateAverageReportPage";
 import RatingsPage from "./pages/RatingsPage";
-import ScheduleEditPage from "./pages/ScheduleEditPage";
 import ScheduleAddPage from "./pages/ScheduleAddPage";
 import ScheduleAddTest from "./pages/ScheduleAddTest";
 import ScheduleReportPage from "./pages/ScheduleReportPage";
@@ -202,10 +201,9 @@ export default function App() {
                     <Route path="/app/adduser/:id?" component={AddUserPage} />
 
                     <Route exact path="/app/schedule" component={SchedulePage} />
-                    <Route exact path="/app/schedule/create" component={ScheduleAddPage} />
+                    <Route exact path="/app/schedule/create/:id?" component={ScheduleAddPage} />
                     <Route exact path="/app/schedule/test" component={ScheduleAddTest} />
                     <Route exact path="/app/schedule/report" component={ScheduleReportPage} />
-                    <Route exact path="/app/schedule/:id" component={ScheduleEditPage} />
 
                     <Route path="/app/schedule" component={SchedulePage} />
                     <Route path="/app/reportsheet" component={ReportSheetPage} />
